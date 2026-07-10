@@ -1,57 +1,40 @@
-// Program: Calculates a telephone bill based on the number of phone calls.
-
 import java.util.Scanner;
 
-class TelephoneBillCalculator {
+public class TelephoneBillCalculator {
 
-    // Method to calculate the telephone bill
-    void calculateBill() {
-
-        // Create Scanner object for user input
-        Scanner sc = new Scanner(System.in);
-
-        // Variable to store the final bill amount
-        double totalBill;
-
-        // Read the number of phone calls
-        System.out.print("Enter the number of phone calls: ");
-        int calls = sc.nextInt();
-
-        // Calculate the bill according to the slab rates
+    // 1. PURE BUSINESS LOGIC: This method ONLY does math. 
+    // It doesn't know about Scanners or printing.
+    public double calculateTotal(int calls) {
         if (calls < 0) {
-
-            totalBill = 0.0;
-
-        } else if (calls <= 100) {
-
-            totalBill = 500.0;
-
+            System.err.println("Error: Number of calls cannot be negative.");
+            return 0.0;
+        } 
+        
+        if (calls <= 100) {
+            return 500.0;
         } else if (calls <= 200) {
-
-            totalBill = 500 + (calls - 100) * 1.10;
-
+            return 500.0 + ((calls - 100) * 1.10);
         } else if (calls <= 300) {
-
-            totalBill = 500 + (100 * 1.10) + (calls - 200) * 1.25;
-
+            return 500.0 + (100 * 1.10) + ((calls - 200) * 1.25);
         } else {
-
-            totalBill = 500 + (100 * 1.10) + (100 * 1.25) + (calls - 300) * 1.35;
+            return 500.0 + (100 * 1.10) + (100 * 1.25) + ((calls - 300) * 1.35);
         }
-
-        // Display the bill
-        System.out.println("\nNumber of Calls : " + calls);
-        System.out.println("Total Bill      : ₹" + totalBill);
-
-        // Close the Scanner
-        sc.close();
     }
 
-    // Main method
+    // 2. I/O LOGIC: The main method handles the user interaction safely.
     public static void main(String[] args) {
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.print("Enter the number of phone calls: ");
+            int calls = sc.nextInt();
 
-        // Create an object and call the method
-        TelephoneBillCalculator obj = new TelephoneBillCalculator();
-        obj.calculateBill();
+            TelephoneBillCalculator calculator = new TelephoneBillCalculator();
+            
+            // We pass the data in, and get the final money out
+            double finalBill = calculator.calculateTotal(calls);
+
+            System.out.println("\n--- Bill Summary ---");
+            System.out.println("Number of Calls : " + calls);
+            System.out.println("Total Bill      : ₹" + finalBill);
+        }
     }
 }
