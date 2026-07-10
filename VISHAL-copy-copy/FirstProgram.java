@@ -1,32 +1,33 @@
+// Program: Demonstrates the use of instance variables,
+// constructors, and methods in Java.
 
-// Practice program: simple class with a stored value and sample addition method.
-/**
- * Demonstrates a simple stored value and a method that adds to it.
- *
- * Useful as a small starter class for practicing constructors and methods.
- */
-public class FirstProgram
-{
-    // Stores the base value used by sampleMethod.
-    private int x;
+public class FirstProgram {
 
-    /**
-     * Constructor for objects of class FirstProgram
-     */
-    public FirstProgram()
-    {
-        // initialise instance variables
-        x = 0;
+    // Instance variable that stores a value
+    private int value;
+
+    // Default constructor
+    public FirstProgram() {
+        value = 0;
     }
 
-    /**
-     * Adds the supplied value to the stored value.
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        return x + y;
+    // Parameterized constructor
+    public FirstProgram(int value) {
+        this.value = value;
+    }
+
+    // Returns the stored value
+    public int getValue() {
+        return value;
+    }
+
+    // Updates the stored value
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    // Adds a number to the stored value and returns the result
+    public int add(int number) {
+        return value + number;
     }
 }
